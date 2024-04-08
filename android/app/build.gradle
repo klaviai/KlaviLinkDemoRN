@@ -76,7 +76,7 @@ android {
 
     namespace "com.klavilinkdemorn"
     defaultConfig {
-        applicationId "com.klavilinkdemorn"
+        applicationId "com.klavi.link.demorn"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
