@@ -25,6 +25,17 @@ const list = [
     key: '2',
   },
   {
+    label: 'ofpf-multi-insti（A）',
+    value: `https://open-testing.klavi.ai/data/v1/basic-links/ofpf-multi-insti?redirect_url=${redirectURL}`,
+    key: '3',
+  },
+  {
+    label: 'ofpf-singl-insti（B）',
+    value: `https://open-testing.klavi.ai/data/v1/basic-links/ofpf-singl-insti?redirect_url=${redirectURL}`,
+    key: '4',
+  },
+
+  {
     label: 'Custom Klavi Link',
     value: `https://open.klavi.tech/data/v1/basic-links/ofpfdemo?redirect_url=${redirectURL}`,
     key: 'custom',
@@ -59,7 +70,7 @@ const HomePage = ({navigation}: Props) => {
         style={styles.textInput}
       />
       <Button
-        title="Open in webview"
+        title="Open in Webview"
         onPress={() => navigation.navigate('Web', {url: url})}
       />
       <Button title="Open in browser" onPress={() => Linking.openURL(url)} />
