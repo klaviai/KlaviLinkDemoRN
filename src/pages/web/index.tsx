@@ -4,19 +4,24 @@ import {WebView} from 'react-native-webview';
 import {RootStackParamList} from '../../route';
 import {Linking, SafeAreaView, StyleSheet} from 'react-native';
 import {ShouldStartLoadRequest} from 'react-native-webview/lib/WebViewTypes';
-import {URL} from 'react-native-url-polyfill';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Web'>;
 
-const whiteList = [
-  'open.klavi.tech',
-  'open-sandbox.klavi.ai',
-  'open-testing.klavi.ai',
-  'open.klavi.ai',
-];
-
 const WebPage = ({route}: Props) => {
   const {url} = route.params;
+
+  const urlWhiteList = [
+    'https://open.klavi.tech',
+    'https://open-sandbox.klavi.ai',
+    'https://open-testing.klavi.ai',
+    'https://open.klavi.ai',
+    'https://www.google.com/recaptcha',
+    'https://recaptcha.google.com/recaptcha',
+  ];
+
+  const isInWhitelistFn = (urlString: string) => {
+    return urlWhiteList.some(item => urlString.startsWith(item));
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,11 +37,10 @@ const WebPage = ({route}: Props) => {
             return false;
           }
           try {
-            const requestUrl = new URL(event.url);
-            if (whiteList.includes(requestUrl.host)) {
+            if (isInWhitelistFn(event.url)) {
               return true;
             }
-            Linking.openURL(requestUrl.href);
+            Linking.openURL(event.url);
             return false;
           } catch (error) {
             console.warn(error);
